@@ -89,6 +89,8 @@ namespace Spark.Compiler.VisualBasic
                 source.Write("      ").Write(string.Join(", _\r\n      ",
                                                                Descriptor.Templates.Select(
                                                                    t => "\"" + t + "\"").ToArray()));
+				// TODO : t => "\"" + SparkViewAttribute.ConvertToAttributeFormat(t) + "\"").ToArray()));
+				
                 source.WriteLine("    })> _");
             }
 

@@ -17,10 +17,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.IO;
 
 namespace Spark.FileSystem
-{
-    public class EmbeddedViewFolder : InMemoryViewFolder
+{    	
+	public class EmbeddedViewFolder : InMemoryViewFolder
     {
         private readonly Assembly _assembly;
         private readonly string _resourcePath;
@@ -47,8 +48,8 @@ namespace Spark.FileSystem
                     stream.Read(contents, 0, contents.Length);
 
                     var relativePath = resourceName.Substring(path.Length + 1);
-                    relativePath = relativePath.Replace('.', '\\');
-                    var lastDelimiter = relativePath.LastIndexOf('\\');
+                    relativePath = relativePath.Replace('.', Path.DirectorySeparatorChar);
+                    var lastDelimiter = relativePath.LastIndexOf(Path.DirectorySeparatorChar);
                     if (lastDelimiter >= 0)
                     {
                         relativePath = relativePath.Substring(0, lastDelimiter) + "." +
@@ -58,6 +59,5 @@ namespace Spark.FileSystem
                 }
             }
         }
-
     }
 }
