@@ -153,7 +153,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Spark.Tests.Views\Code\foreach.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -263,6 +262,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Spark.Tests.Views\Shared\_UsePartialWithSpecialElements.spark">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Spark.Tests.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
