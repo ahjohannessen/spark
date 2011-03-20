@@ -56,10 +56,10 @@ namespace Spark.Tests.Compiler
             var compiler = new VisualBasicViewCompiler { BaseClass = "Spark.Tests.Stubs.StubSparkView" };
 
             DoCompileView(compiler, new Chunk[]
-                                    {
-                                        new SendLiteralChunk { Text = "hello world" }, 
-                                        new ViewDataModelChunk { TModel="Global.System.String"}
-                                    });
+            {
+                new SendLiteralChunk { Text = "hello world" }, 
+                new ViewDataModelChunk { TModel="Global.System.String"}
+            });
 
             var instance = compiler.CreateInstance();
             string contents = instance.RenderView();
@@ -223,18 +223,24 @@ namespace Spark.Tests.Compiler
         }
 
         [Test]
-		[Ignore("Enable again later: ahjohannessen")]
         public void TargetNamespace()
         {
+            // TODO: Fix on Mono/Linux - ahjohannessen
+            var platform = Environment.OSVersion.Platform;
+            if(platform == PlatformID.Unix || platform == PlatformID.MacOSX)
+            {
+                Assert.Ignore();
+            }
+
             var compiler = new VisualBasicViewCompiler
-                           {
-                               BaseClass = "Spark.AbstractSparkView",
-                               Descriptor = new SparkViewDescriptor { TargetNamespace = "Testing.Target.Namespace" }
-                           };
+            {
+                BaseClass = "Spark.AbstractSparkView",
+                Descriptor = new SparkViewDescriptor { TargetNamespace = "Testing.Target.Namespace" }
+            };
+            
             DoCompileView(compiler, new Chunk[] { new SendLiteralChunk { Text = "Hello" } });
             var instance = compiler.CreateInstance();
             Assert.AreEqual("Testing.Target.Namespace", instance.GetType().Namespace);
-
         }
 
 

@@ -20,6 +20,7 @@
 // <author>John Gietzen</author>
 //-------------------------------------------------------------------------
 
+
 namespace Spark.Tests.Caching
 {
     using System;
@@ -30,6 +31,7 @@ namespace Spark.Tests.Caching
     using NUnit.Framework.SyntaxHelpers;
     using Spark.FileSystem;
     using Spark.Tests.Stubs;
+	using System.IO;
 
     [TestFixture]
     public class CacheElementTester
