@@ -21,6 +21,7 @@ using NUnit.Framework;
 using Spark.Bindings;
 using Spark.FileSystem;
 using System.IO;
+using System.Threading;
 
 namespace Spark.Tests
 {
@@ -40,15 +41,6 @@ namespace Spark.Tests
 
             var bindingProvider = container.GetService<IBindingProvider>();
             Assert.IsInstanceOf(typeof(DefaultBindingProvider), bindingProvider);
-        }
-
-        [Test]
-        public void ConfigSettingsUsedByDefault()
-        {
-            var container = new SparkServiceContainer();
-
-            var settings = container.GetService<ISparkViewEngine>().Settings;
-            Assert.AreSame(ConfigurationManager.GetSection("spark"), settings);
         }
 
         [Test]

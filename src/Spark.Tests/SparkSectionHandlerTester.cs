@@ -29,17 +29,6 @@ namespace Spark.Tests
     public class SparkSectionHandlerTester
     {
         [Test]
-        public void CanLoadFromAppConfig()
-        {
-            var config = (SparkSectionHandler)ConfigurationManager.GetSection("spark");
-            Assert.IsTrue(config.Compilation.Debug);
-        	Assert.AreEqual(NullBehaviour.Strict, config.Compilation.NullBehaviour);
-            Assert.AreEqual(1, config.Compilation.Assemblies.Count);
-            Assert.AreEqual(typeof(StubSparkView).FullName, config.Pages.PageBaseType);
-            Assert.AreEqual(1, config.Pages.Namespaces.Count);
-        }
-
-        [Test]
         public void CreateSectionHandlerFluentInterface()
         {
             var config = new SparkSectionHandler()

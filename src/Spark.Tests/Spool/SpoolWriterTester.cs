@@ -165,13 +165,12 @@ namespace Spark.Tests.Spool
             Assert.IsNull(pages2.Next.Next.Next);
 
             var countBeforeCollect = _cache.Count;
-            // ReSharper disable RedundantAssignment
-            writer1 = null;
-            writer2 = null;
-            // ReSharper restore RedundantAssignment
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            var countAfterCollect = _cache.Count;
+			
+			// Simulate GC
+			writer1.Dispose();	
+			writer2.Dispose();
+            
+			var countAfterCollect = _cache.Count;
 
             Assert.AreEqual(0, countBefore);
             Assert.AreEqual(0, countBeforeCollect);
