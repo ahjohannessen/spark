@@ -21,6 +21,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using Microsoft.CSharp;
+using System.Linq;
 
 namespace Spark.Compiler
 {
@@ -66,11 +67,15 @@ namespace Spark.Compiler
 
             compilerParameters.TreatWarningsAsErrors = false;
             var extension = codeProvider.FileExtension;
-
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+			
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies();			
+			var refAssemblies = assemblies.SelectMany(x => x.GetReferencedAssemblies());
+			var refsUseMscorlib = refAssemblies.Any(x => x.FullName.Contains("mscorlib"));
+			
+            foreach (var assembly in assemblies)
             {
 
-                if (assembly.IsDynamic())
+                if (assembly.IsDynamic() || assembly.FullName.Contains("mscorlib") && refsUseMscorlib)
                     continue;
 
                 compilerParameters.ReferencedAssemblies.Add(assembly.Location);
